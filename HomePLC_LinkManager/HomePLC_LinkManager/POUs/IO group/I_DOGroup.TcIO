@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <Itf Name="I_DOGroup" Id="{77cdbb6a-b25c-44fd-9c61-0e16924037f0}">
+    <Declaration><![CDATA[INTERFACE I_DOGroup]]></Declaration>
+    <Folder Name="Methods" Id="{c84e9588-7a66-4a33-9241-552f324e39ed}" />
+    <Folder Name="Properties" Id="{8aa7c5a5-3349-45b5-af16-bc18d0b7554d}" />
+    <Method Name="AddOutput" Id="{e4f61fde-6f06-4388-aa68-e03a1c9bc0da}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Add output to group
+METHOD AddOutput
+VAR_INPUT
+	IDO			: I_DigitalOut;		// Digital output
+END_VAR]]></Declaration>
+    </Method>
+    <Property Name="Count" Id="{16ac6071-69f8-45bd-b746-e20198552638}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Gets the total number of IOs in the group
+PROPERTY Count : INT]]></Declaration>
+      <Get Name="Get" Id="{46ce07e3-042d-4a61-ba1b-6fb7022e056b}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="GetOutput" Id="{dfa660dd-3bdb-4bb4-8dda-b1f06f4ac57d}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Get a specific output from the group
+METHOD GetOutput : I_DigitalOut
+VAR_INPUT
+	nOutputIndex		: INT;		// Output index
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="SetCommand" Id="{02fefac4-05e6-451c-988c-af2639752daa}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Set the command to the outputs in the group
+METHOD SetCommand
+VAR_INPUT
+	eCommand	: E_DOCommand;
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

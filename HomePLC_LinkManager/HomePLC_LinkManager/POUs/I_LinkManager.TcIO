@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <Itf Name="I_LinkManager" Id="{548b9525-8581-4e48-914c-5c3e50e333c0}">
+    <Declaration><![CDATA[// Link manager interface
+INTERFACE I_LinkManager]]></Declaration>
+    <Folder Name="Methods" Id="{390103af-1e24-4962-b17e-a1581c2a83ac}" />
+    <Folder Name="Properties" Id="{a5cc489d-1c03-4dac-b7f8-5ff6f9100460}" />
+    <Method Name="CommitLink" Id="{15cfa0e7-ecdf-4736-bd2b-cadadd99635a}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Commit link so it can be executed
+METHOD CommitLink]]></Declaration>
+    </Method>
+    <Property Name="Link" Id="{06c01cfb-27e9-441c-86c9-55105799127c}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Returns a link that can be configured and then committed
+PROPERTY Link : I_Link]]></Declaration>
+      <Get Name="Get" Id="{fbeff7a7-bc76-43c3-9236-c23a7f6b80fd}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

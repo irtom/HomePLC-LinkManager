@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_DOGroup" Id="{b3488830-ec61-443c-9742-10099d09d800}" SpecialFunc="None">
+    <Declaration><![CDATA[// Digital output group
+FUNCTION_BLOCK FB_DOGroup EXTENDS FB_IOGroup IMPLEMENTS I_DOGroup
+VAR
+	aOut		: ARRAY [0..nMaxSize - 1] OF I_DigitalOut;		// Array of interfaces to digital outputs
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Methods" Id="{3a95f167-8838-43a7-9c46-3573e393aca1}" />
+    <Method Name="AddOutput" Id="{d02ea73d-8c89-4a2a-8090-763a0721398e}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Add output to group
+METHOD AddOutput
+VAR_INPUT
+	IDO			: I_DigitalOut;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF nSize < nMaxSize THEN
+	aOut[nSize] := IDO;
+	nSize := nSize + 1;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Execute" Id="{e77e7b2c-f6f1-456d-bfbf-b27bf30a79b9}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Runs the execute method of all digital output FBs in the group
+METHOD Execute
+VAR
+	i		: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO nSize - 1 DO
+	aOut[i].Execute();
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetOutput" Id="{3ab7d26e-6f1d-4872-b024-6588ee0cb538}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Get a specific output from the group
+METHOD GetOutput : I_DigitalOut
+VAR_INPUT
+	nOutputIndex		: INT;		// Output index
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetOutput := aOut[nOutputIndex];]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetCommand" Id="{9ed0280c-8f0a-4e75-8f4b-35a22c587e1b}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Set the command to the outputs in the group
+METHOD SetCommand
+VAR_INPUT
+	eCommand	: E_DOCommand;
+END_VAR
+VAR
+	i			: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO nSize - 1 DO
+	IF aOut[i].Command = E_DOCommand.None THEN
+		// No command yet, set new command
+		aOut[i].SetCommand(eCommand);
+	ELSE
+		// A command was already issued
+		// Do nothing
+	END_IF
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_DOGroup">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DOGroup.AddOutput">
+      <LineId Id="15" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="16" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DOGroup.Execute">
+      <LineId Id="5" Count="2" />
+    </LineIds>
+    <LineIds Name="FB_DOGroup.GetOutput">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DOGroup.SetCommand">
+      <LineId Id="9" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="25" Count="2" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

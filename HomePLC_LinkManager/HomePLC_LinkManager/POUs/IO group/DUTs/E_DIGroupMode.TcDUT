@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="E_DIGroupMode" Id="{9a116bde-ca25-49d3-bcf5-052f0b5b9c7e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+// Mode of combining digital input commands
+TYPE E_DIGroupMode :
+(
+	ModeAND := 0,		// All inputs need to be used to issue the command
+	ModeOR	:= 1		// One input is sufficient to issue a command
+);
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

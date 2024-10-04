@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <Itf Name="I_DIGroup" Id="{47af0e41-2432-4a87-a436-53179529a67a}">
+    <Declaration><![CDATA[INTERFACE I_DIGroup
+]]></Declaration>
+    <Folder Name="Methods" Id="{994b8b7d-16c0-4a44-9f40-a832e8ed5871}" />
+    <Folder Name="Properties" Id="{7635148f-1bc0-4447-8062-31dd6668195d}" />
+    <Method Name="AddInput" Id="{e5d7ee1b-ab47-422d-9ca9-d608d338ffbd}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Add input to group
+METHOD AddInput
+VAR_INPUT
+	IDI			: I_DigitalIn;		// Digital input
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="Count" Id="{04300eab-0eb0-45f6-897c-5d3b70ee1a7e}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Gets the total number of IOs in the group
+PROPERTY Count : INT]]></Declaration>
+      <Get Name="Get" Id="{92cfac21-00b3-4f30-80f2-7f54689eada7}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="GetCommand" Id="{6320d08d-1fef-473b-a8e4-8266b5d5899c}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Determine the command from the inputs in the group
+METHOD GetCommand : E_DICommand]]></Declaration>
+    </Method>
+    <Method Name="GetInput" Id="{15dc0faf-d9f3-49bb-8df8-bf91dcd02d4e}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Get a specific input from the group
+METHOD GetInput : I_DigitalIn
+VAR_INPUT
+	nInputIndex		: INT;		// Input index
+END_VAR]]></Declaration>
+    </Method>
+    <Property Name="Mode" Id="{82d1dade-437a-4999-b446-d332f2876426}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Set input group mode (default OR)
+PROPERTY Mode : E_DIGroupMode]]></Declaration>
+      <Set Name="Set" Id="{f311e281-f2a1-4c71-a07e-8e99f812e526}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+      </Set>
+    </Property>
+  </Itf>
+</TcPlcObject>

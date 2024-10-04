@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_Link" Id="{04cab8aa-8b6c-4150-a2fd-0c4775e771ff}">
+    <Declaration><![CDATA[INTERFACE I_Link
+]]></Declaration>
+    <Folder Name="Properties" Id="{d3758d61-f435-4656-9eff-9b20d008ef4a}" />
+    <Property Name="ExcludeFromOverview" Id="{e7a80a3a-f2eb-4939-b1f8-9f0a5fff8c15}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Get/set if the link needs to be excluded from the links overview
+PROPERTY ExcludeFromOverview : BOOL]]></Declaration>
+      <Get Name="Get" Id="{9ea60335-bb8f-414c-b646-f5c0e2209c90}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{7dc2ad2b-c4a2-424f-addb-29b887e14e0d}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="InputGroup" Id="{8a3382ce-fc11-432e-b0be-1163f5a1d7ee}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Group of inputs
+PROPERTY InputGroup : I_DIGroup]]></Declaration>
+      <Get Name="Get" Id="{8c768c7c-3031-429b-acd5-3c405fa88487}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{94833dc0-77e7-40bc-9b7a-04607a5883f8}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="OutputGroup" Id="{1036a780-dec2-42ee-9f72-df6d5c79c06b}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Group of outputs
+PROPERTY OutputGroup : I_DOGroup]]></Declaration>
+      <Get Name="Get" Id="{1236f278-ff8b-4a03-8076-aea1611c0b7b}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{13a04904-07f8-4e68-bbd1-3b22a38309d8}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="OutputReaction" Id="{d1db3345-c9f3-408c-8b05-4b08ab7283b3}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Output reaction
+PROPERTY OutputReaction : REFERENCE TO ST_CommandTranslation]]></Declaration>
+      <Get Name="Get" Id="{cf5961d1-69ce-4359-af40-0c4037411f05}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

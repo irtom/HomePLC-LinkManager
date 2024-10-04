@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_Link" Id="{4bdfcc53-a26b-4e04-a8fa-6241c9f785b7}" SpecialFunc="None">
+    <Declaration><![CDATA[// Link between an input and an output group
+FUNCTION_BLOCK FB_Link IMPLEMENTS I_Link
+VAR
+	IInputGroup				: I_DIGroup;				// Input group interface
+	IOutputGroup			: I_DOGroup;				// Output group interface
+	
+	fbInputGroup			: FB_DIGroup;				// Input group FB, in case interface is not set to an FB
+	fbOutputGroup			: FB_DOGroup;				// Output group FB, in case interface is not set to an FB
+	
+	stCommandTranslation	: ST_CommandTranslation;	// Input command to output command translation
+	bExcludeFromOverview	: BOOL;						// Set to true to exclude this link from the links overview
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Methods" Id="{57dd5418-cd8a-44ff-a950-1e53b6a2b33d}" />
+    <Folder Name="Properties" Id="{ef64cc13-6f9f-4c66-b9be-a6edd8f4c353}" />
+    <Property Name="ExcludeFromOverview" Id="{5cebf5de-44fa-407c-a7da-dcb80c71f22e}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Get/set if the link needs to be excluded from the links overview
+PROPERTY ExcludeFromOverview : BOOL]]></Declaration>
+      <Get Name="Get" Id="{5d2869da-268e-48e5-9e2d-6c469d52bbc3}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ExcludeFromOverview := bExcludeFromOverview;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{9986ab5d-e696-4175-911c-bba7029e00ad}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bExcludeFromOverview := ExcludeFromOverview;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Execute" Id="{03b78132-bebc-4c43-b1d6-015f07efcbcd}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Execute input group, get its command and then execute the output group with that command
+METHOD Execute]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Get input command and translate it to an output command
+CASE IInputGroup.GetCommand() OF
+	E_DICommand.None:
+		IOutputGroup.SetCommand(E_DOCommand.None);
+	E_DICommand.ShortPress:
+		IOutputGroup.SetCommand(stCommandTranslation.OnShortPress);
+	E_DICommand.DoublePress:
+		IOutputGroup.SetCommand(stCommandTranslation.OnDoublePress);
+	E_DICommand.LongPress:
+		IOutputGroup.SetCommand(stCommandTranslation.OnLongPress);
+	E_DICommand.Hold:
+		IOutputGroup.SetCommand(stCommandTranslation.OnHold);
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{68fa15b7-0a6f-454e-831e-4be7e69bf9b4}" FolderPath="Methods\">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Initialize interfaces with local FBs, can be replaced afterwards if needed
+IInputGroup := fbInputGroup;
+IOutputGroup := fbOutputGroup;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="InputGroup" Id="{b8e98866-4a22-4867-bd12-4fe6a4cb7d0e}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Group of inputs
+PROPERTY InputGroup : I_DIGroup]]></Declaration>
+      <Get Name="Get" Id="{7c2e7608-028d-48ad-94a1-d9d99e46c3ac}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InputGroup := IInputGroup;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{bcdcbcb5-d731-42aa-b712-c7f4db9644d5}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IInputGroup := InputGroup;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="OutputGroup" Id="{72f6e40d-99e0-40f6-8cae-302d92986f9f}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Group of outputs
+PROPERTY OutputGroup : I_DOGroup]]></Declaration>
+      <Get Name="Get" Id="{4c94efd2-d38e-4ccf-b66d-fbf6a63cb0ad}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[OutputGroup := IOutputGroup;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{03aa02e5-5c62-4508-9440-48751e728753}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IOutputGroup := OutputGroup;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="OutputReaction" Id="{871003ca-49ea-4200-9d92-ebff50c7ab04}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Output reaction
+PROPERTY OutputReaction : REFERENCE TO ST_CommandTranslation]]></Declaration>
+      <Get Name="Get" Id="{63f201af-147f-4f6e-9765-0b687f0a4b91}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[OutputReaction REF= stCommandTranslation;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_Link">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Link.ExcludeFromOverview.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Link.ExcludeFromOverview.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Link.Execute">
+      <LineId Id="24" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="17" Count="3" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="16" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Link.FB_init">
+      <LineId Id="8" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Link.InputGroup.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Link.InputGroup.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Link.OutputGroup.Get">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Link.OutputGroup.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Link.OutputReaction.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

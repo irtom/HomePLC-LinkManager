@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_LinkManager" Id="{a192d699-b6d1-4b1f-a60b-ed76d0a612c7}" SpecialFunc="None">
+    <Declaration><![CDATA[// Link manager
+FUNCTION_BLOCK FB_LinkManager IMPLEMENTS I_LinkManager
+VAR
+	aLinks			: ARRAY [0..nMaxSize - 1] OF FB_Link;	// Array of links
+	nSize			: INT;									// Number of links in the array
+END_VAR
+VAR CONSTANT
+	nMaxSize		: INT := 100;							// Maximum number of IOs in a group
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Methods" Id="{aba4ef6c-931d-4c83-a958-576d5433ae95}" />
+    <Folder Name="Properties" Id="{25d22b82-de27-49e5-b7ae-24a2acc0ee71}" />
+    <Method Name="CommitLink" Id="{89d84ba9-5e8e-47be-abeb-0fce12dcdb68}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Commit link so it can be executed
+METHOD CommitLink]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF nSize < nMaxSize THEN
+	nSize := nSize + 1;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Execute" Id="{7b1d0740-15ff-46c5-912e-fdb9053862e7}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Execute links
+METHOD Execute
+VAR
+	i		: INT;		// Iterator variable
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Execute all links
+FOR i := 0 TO nSize - 1 DO
+	aLinks[i].Execute();
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetLink" Id="{2665f036-fcbf-44fc-915d-093e31eb5a2d}" FolderPath="Methods\">
+      <Declaration><![CDATA[METHOD GetLink : I_Link
+VAR_INPUT
+	nIndex		: INT;		// Link index
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetLink := aLinks[nIndex];]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Link" Id="{e10bf8e0-585f-481e-920e-184edc81dbf1}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Returns a link that can be configured and then committed
+PROPERTY Link : I_Link]]></Declaration>
+      <Get Name="Get" Id="{0527eadf-6df6-4f9a-98e1-3c80ae9d82ad}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Link := aLinks[nSize];]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_LinkManager">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_LinkManager.CommitLink">
+      <LineId Id="7" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_LinkManager.Execute">
+      <LineId Id="15" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_LinkManager.GetLink">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_LinkManager.Link.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

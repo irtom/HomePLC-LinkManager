@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ST_CommandTranslation" Id="{ee3df985-307e-4c39-90b7-dbe3b5e4a685}">
+    <Declaration><![CDATA[// Translate input commands to output commands
+TYPE ST_CommandTranslation :
+STRUCT
+	OnShortPress	: E_DOCommand := E_DOCommand.None;	// Output command when input command is short press
+	OnLongPress		: E_DOCommand := E_DOCommand.None;	// Output command when input command is long press
+	OnDoublePress	: E_DOCommand := E_DOCommand.None;	// Output command when input command is double press
+	OnHold			: E_DOCommand := E_DOCommand.None;	// Output command when input command is hold
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

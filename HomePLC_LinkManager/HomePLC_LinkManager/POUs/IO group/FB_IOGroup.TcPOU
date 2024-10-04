@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_IOGroup" Id="{4531a855-0a56-4011-8391-db543050b8dd}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'reflection'} 
+FUNCTION_BLOCK FB_IOGroup
+VAR
+	nSize			: INT;			// Number of IOs in this group
+	
+	fbLogger		: class_Tc3EventLogger;
+	
+	// Use attributes to copy instance name to sName
+	{attribute 'instance-path'} 
+    {attribute 'noinit'} 
+    sName			: STRING; 		// Instance name
+END_VAR
+VAR CONSTANT
+	nMaxSize		: INT := 100;	// Maximum number of IOs in a group
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Methods" Id="{9fe213a0-05d5-4d4a-8e63-8315262ff3ef}" />
+    <Folder Name="Properties" Id="{0a0584c4-3a98-4206-b008-cff9b472912a}" />
+    <Property Name="Count" Id="{45b7875c-f63b-4ba1-ad01-1d689b7a8d19}" FolderPath="Properties\">
+      <Declaration><![CDATA[// Gets the total number of IOs in the group
+PROPERTY Count : INT]]></Declaration>
+      <Get Name="Get" Id="{021232c1-eba9-4e55-b89c-83ce73e64ec1}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Count := nSize;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{a63ccfeb-2502-4d61-95a8-ecc60ee2e8e1}" FolderPath="Methods\">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbLogger.Init(sSource := sName, bEnableVerbose := FALSE);]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_IOGroup">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_IOGroup.Count.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_IOGroup.FB_init">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
