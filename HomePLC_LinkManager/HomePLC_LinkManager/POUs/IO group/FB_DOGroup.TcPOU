@@ -4,12 +4,28 @@
     <Declaration><![CDATA[// Digital output group
 FUNCTION_BLOCK FB_DOGroup EXTENDS FB_IOGroup IMPLEMENTS I_DOGroup
 VAR
-	aOut		: ARRAY [0..nMaxSize - 1] OF I_DigitalOut;		// Array of interfaces to digital outputs
+	aOut			: ARRAY [0..nMaxSize - 1] OF I_DigitalOut;		// Array of interfaces to digital outputs
+	
+	aIndicator		: ARRAY [0..nMaxSize - 1] OF I_DigitalOut;		// Array of interfaces to digital outputs that serve as indicators
+	nSizeIndicators	: INT;											// Size of indicator array
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Folder Name="Methods" Id="{3a95f167-8838-43a7-9c46-3573e393aca1}" />
+    <Method Name="AddIndicator" Id="{0d2a6617-311a-4efc-96e6-1ebf7609d9f7}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Add indicator to group
+METHOD AddIndicator
+VAR_INPUT
+	IDO			: I_DigitalOut;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF nSizeIndicators < nMaxSize THEN
+	aIndicator[nSizeIndicators] := IDO;
+	nSizeIndicators := nSizeIndicators + 1;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="AddOutput" Id="{d02ea73d-8c89-4a2a-8090-763a0721398e}" FolderPath="Methods\">
       <Declaration><![CDATA[// Add output to group
 METHOD AddOutput
@@ -23,11 +39,28 @@ END_VAR]]></Declaration>
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Method Name="DirectControl" Id="{c2af6b2e-8e0c-4bed-815d-f454ed6e90fb}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Update the indicator values based on the value of the outputs
+METHOD DirectControl
+VAR
+	i	: INT;		// Iterator variable
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Check if there is at least one output in the group since at least one output is needed to determine the output value
+IF nSize > 0 THEN
+	// Set output value of all indicators to that of the first output in the group (all others are the same anyway)
+	FOR i := 0 TO nSizeIndicators - 1 DO
+		aIndicator[i].DirectControl := aOut[0].Value;
+	END_FOR
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Execute" Id="{e77e7b2c-f6f1-456d-bfbf-b27bf30a79b9}" FolderPath="Methods\">
-      <Declaration><![CDATA[// Runs the execute method of all digital output FBs in the group
+      <Declaration><![CDATA[// Runs the execute method of all digital output FBs in the group.
+// Make sure all digital output execute methods are called only once per PLC cyle
 METHOD Execute
 VAR
-	i		: INT;
+	i		: INT;		// Iterator variable
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[FOR i := 0 TO nSize - 1 DO

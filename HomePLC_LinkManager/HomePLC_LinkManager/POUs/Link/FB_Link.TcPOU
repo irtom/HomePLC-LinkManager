@@ -35,7 +35,7 @@ PROPERTY ExcludeFromOverview : BOOL]]></Declaration>
       </Set>
     </Property>
     <Method Name="Execute" Id="{03b78132-bebc-4c43-b1d6-015f07efcbcd}" FolderPath="Methods\">
-      <Declaration><![CDATA[// Execute input group, get its command and then execute the output group with that command
+      <Declaration><![CDATA[// Pass the command from the input group to the output group
 METHOD Execute]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Get input command and translate it to an output command
@@ -50,7 +50,13 @@ CASE IInputGroup.GetCommand() OF
 		IOutputGroup.SetCommand(stCommandTranslation.OnLongPress);
 	E_DICommand.Hold:
 		IOutputGroup.SetCommand(stCommandTranslation.OnHold);
-END_CASE]]></ST>
+END_CASE
+
+// Update output group indicators
+IOutputGroup.DirectControl();
+
+// Do not call the execute method of all IO groups here
+// A digital in/output may appear in multiple links and the execute method should not be called more than once per PLC cycle]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{68fa15b7-0a6f-454e-831e-4be7e69bf9b4}" FolderPath="Methods\">

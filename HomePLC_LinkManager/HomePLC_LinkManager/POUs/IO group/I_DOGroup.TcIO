@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <Itf Name="I_DOGroup" Id="{77cdbb6a-b25c-44fd-9c61-0e16924037f0}">
     <Declaration><![CDATA[INTERFACE I_DOGroup]]></Declaration>
     <Folder Name="Methods" Id="{c84e9588-7a66-4a33-9241-552f324e39ed}" />
     <Folder Name="Properties" Id="{8aa7c5a5-3349-45b5-af16-bc18d0b7554d}" />
+    <Method Name="AddIndicator" Id="{7c722938-9026-4f7a-9121-e403baca1597}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Add indicator to group
+METHOD AddIndicator
+VAR_INPUT
+	IDO			: I_DigitalOut;
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="AddOutput" Id="{e4f61fde-6f06-4388-aa68-e03a1c9bc0da}" FolderPath="Methods\">
       <Declaration><![CDATA[// Add output to group
 METHOD AddOutput
@@ -18,6 +25,10 @@ PROPERTY Count : INT]]></Declaration>
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Method Name="DirectControl" Id="{5752acf4-3d21-4c32-818e-197ed59fc611}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Update the indicator values based on the value of the outputs
+METHOD DirectControl]]></Declaration>
+    </Method>
     <Method Name="GetOutput" Id="{dfa660dd-3bdb-4bb4-8dda-b1f06f4ac57d}" FolderPath="Methods\">
       <Declaration><![CDATA[// Get a specific output from the group
 METHOD GetOutput : I_DigitalOut
