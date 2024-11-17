@@ -66,29 +66,5 @@ END_VAR]]></Declaration>
 END_FOR]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_DOGroup">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_DOGroup.AddOutput">
-      <LineId Id="15" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="16" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_DOGroup.Execute">
-      <LineId Id="5" Count="2" />
-    </LineIds>
-    <LineIds Name="FB_DOGroup.GetOutput">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_DOGroup.SetCommand">
-      <LineId Id="9" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="25" Count="2" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="14" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

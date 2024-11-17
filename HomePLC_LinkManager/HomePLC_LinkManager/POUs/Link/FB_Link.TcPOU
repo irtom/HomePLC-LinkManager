@@ -108,46 +108,5 @@ PROPERTY OutputReaction : REFERENCE TO ST_CommandTranslation]]></Declaration>
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="FB_Link">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Link.ExcludeFromOverview.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Link.ExcludeFromOverview.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Link.Execute">
-      <LineId Id="24" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="17" Count="3" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="16" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Link.FB_init">
-      <LineId Id="8" Count="0" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Link.InputGroup.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Link.InputGroup.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Link.OutputGroup.Get">
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Link.OutputGroup.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Link.OutputReaction.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

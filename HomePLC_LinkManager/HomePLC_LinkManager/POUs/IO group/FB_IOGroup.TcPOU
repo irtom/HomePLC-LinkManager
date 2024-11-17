@@ -41,14 +41,5 @@ END_VAR]]></Declaration>
         <ST><![CDATA[fbLogger.Init(sSource := sName, bEnableVerbose := FALSE);]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_IOGroup">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_IOGroup.Count.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_IOGroup.FB_init">
-      <LineId Id="7" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

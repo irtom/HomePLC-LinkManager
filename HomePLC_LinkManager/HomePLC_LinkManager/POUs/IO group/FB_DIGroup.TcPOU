@@ -146,25 +146,5 @@ PROPERTY Mode : E_DIGroupMode]]></Declaration>
         </Implementation>
       </Set>
     </Property>
-    <LineIds Name="FB_DIGroup">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_DIGroup.AddInput">
-      <LineId Id="22" Count="2" />
-      <LineId Id="18" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_DIGroup.Execute">
-      <LineId Id="5" Count="2" />
-    </LineIds>
-    <LineIds Name="FB_DIGroup.GetCommand">
-      <LineId Id="417" Count="72" />
-      <LineId Id="29" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_DIGroup.GetInput">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_DIGroup.Mode.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
