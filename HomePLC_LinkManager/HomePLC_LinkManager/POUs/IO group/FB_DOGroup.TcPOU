@@ -14,10 +14,12 @@ END_VAR]]></Declaration>
     </Implementation>
     <Folder Name="Methods" Id="{3a95f167-8838-43a7-9c46-3573e393aca1}" />
     <Method Name="AddIndicator" Id="{0d2a6617-311a-4efc-96e6-1ebf7609d9f7}" FolderPath="Methods\">
-      <Declaration><![CDATA[// Add indicator to group
+      <Declaration><![CDATA[// Add indicator to group.
+// Indicators are defined separately from outputs. Indicators follow outputs and the link between them is defined in the PLC.
+// Regardless of how the output is updated (by the PLC or externally), the indicators follow the outputs. 
 METHOD AddIndicator
 VAR_INPUT
-	IDO			: I_DigitalOut;
+	IDO			: I_DigitalOut;		// Interface to digital output that needs to be an indicator
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF nSizeIndicators < nMaxSize THEN
@@ -30,28 +32,12 @@ END_IF]]></ST>
       <Declaration><![CDATA[// Add output to group
 METHOD AddOutput
 VAR_INPUT
-	IDO			: I_DigitalOut;
+	IDO			: I_DigitalOut;		// Interface to digital output
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF nSize < nMaxSize THEN
 	aOut[nSize] := IDO;
 	nSize := nSize + 1;
-END_IF]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="DirectControl" Id="{c2af6b2e-8e0c-4bed-815d-f454ed6e90fb}" FolderPath="Methods\">
-      <Declaration><![CDATA[// Update the indicator values based on the value of the outputs
-METHOD DirectControl
-VAR
-	i	: INT;		// Iterator variable
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[// Check if there is at least one output in the group since at least one output is needed to determine the output value
-IF nSize > 0 THEN
-	// Set output value of all indicators to that of the first output in the group (all others are the same anyway)
-	FOR i := 0 TO nSizeIndicators - 1 DO
-		aIndicator[i].DirectControl := aOut[0].Value;
-	END_FOR
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -63,7 +49,8 @@ VAR
 	i		: INT;		// Iterator variable
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 0 TO nSize - 1 DO
+        <ST><![CDATA[// Call the execute method of all digital outputs in the group
+FOR i := 0 TO nSize - 1 DO
 	aOut[i].Execute();
 END_FOR]]></ST>
       </Implementation>
@@ -97,6 +84,22 @@ END_VAR]]></Declaration>
 		// Do nothing
 	END_IF
 END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateIndicators" Id="{c2af6b2e-8e0c-4bed-815d-f454ed6e90fb}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Update the indicator values based on the value of the outputs
+METHOD UpdateIndicators
+VAR
+	i	: INT;		// Iterator variable
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Check if there is at least one output in the group since at least one output is needed to determine the output value
+IF nSize > 0 THEN
+	// Set output value of all indicators to that of the first output in the group (all others are the same anyway)
+	FOR i := 0 TO nSizeIndicators - 1 DO
+		aIndicator[i].Output := aOut[0].Output;
+	END_FOR
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>

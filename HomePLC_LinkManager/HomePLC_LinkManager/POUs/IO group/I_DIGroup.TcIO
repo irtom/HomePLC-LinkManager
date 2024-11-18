@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <Itf Name="I_DIGroup" Id="{47af0e41-2432-4a87-a436-53179529a67a}">
     <Declaration><![CDATA[INTERFACE I_DIGroup
 ]]></Declaration>
@@ -9,9 +9,8 @@
       <Declaration><![CDATA[// Add input to group
 METHOD AddInput
 VAR_INPUT
-	IDI			: I_DigitalIn;		// Digital input
-END_VAR
-]]></Declaration>
+	IDI			: I_DigitalIn;		// Interface to digital input
+END_VAR]]></Declaration>
     </Method>
     <Property Name="Count" Id="{04300eab-0eb0-45f6-897c-5d3b70ee1a7e}" FolderPath="Properties\">
       <Declaration><![CDATA[// Gets the total number of IOs in the group

@@ -53,7 +53,7 @@ CASE IInputGroup.GetCommand() OF
 END_CASE
 
 // Update output group indicators
-IOutputGroup.DirectControl();
+IOutputGroup.UpdateIndicators();
 
 // Do not call the execute method of all IO groups here
 // A digital in/output may appear in multiple links and the execute method should not be called more than once per PLC cycle]]></ST>

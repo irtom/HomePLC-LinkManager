@@ -5,17 +5,19 @@
     <Folder Name="Methods" Id="{c84e9588-7a66-4a33-9241-552f324e39ed}" />
     <Folder Name="Properties" Id="{8aa7c5a5-3349-45b5-af16-bc18d0b7554d}" />
     <Method Name="AddIndicator" Id="{7c722938-9026-4f7a-9121-e403baca1597}" FolderPath="Methods\">
-      <Declaration><![CDATA[// Add indicator to group
+      <Declaration><![CDATA[// Add indicator to group.
+// Indicators are defined separately from outputs. Indicators follow outputs and the link between them is defined in the PLC.
+// Regardless of how the output is updated (by the PLC or externally), the indicators follow the outputs. 
 METHOD AddIndicator
 VAR_INPUT
-	IDO			: I_DigitalOut;
+	IDO			: I_DigitalOut;		// Interface to digital output that needs to be an indicator
 END_VAR]]></Declaration>
     </Method>
     <Method Name="AddOutput" Id="{e4f61fde-6f06-4388-aa68-e03a1c9bc0da}" FolderPath="Methods\">
       <Declaration><![CDATA[// Add output to group
 METHOD AddOutput
 VAR_INPUT
-	IDO			: I_DigitalOut;		// Digital output
+	IDO			: I_DigitalOut;		// Interface to digital output
 END_VAR]]></Declaration>
     </Method>
     <Property Name="Count" Id="{16ac6071-69f8-45bd-b746-e20198552638}" FolderPath="Properties\">
@@ -25,10 +27,6 @@ PROPERTY Count : INT]]></Declaration>
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
-    <Method Name="DirectControl" Id="{5752acf4-3d21-4c32-818e-197ed59fc611}" FolderPath="Methods\">
-      <Declaration><![CDATA[// Update the indicator values based on the value of the outputs
-METHOD DirectControl]]></Declaration>
-    </Method>
     <Method Name="GetOutput" Id="{dfa660dd-3bdb-4bb4-8dda-b1f06f4ac57d}" FolderPath="Methods\">
       <Declaration><![CDATA[// Get a specific output from the group
 METHOD GetOutput : I_DigitalOut
@@ -42,6 +40,10 @@ METHOD SetCommand
 VAR_INPUT
 	eCommand	: E_DOCommand;
 END_VAR]]></Declaration>
+    </Method>
+    <Method Name="UpdateIndicators" Id="{5752acf4-3d21-4c32-818e-197ed59fc611}" FolderPath="Methods\">
+      <Declaration><![CDATA[// Update the indicator values based on the value of the outputs
+METHOD UpdateIndicators]]></Declaration>
     </Method>
   </Itf>
 </TcPlcObject>
