@@ -90,14 +90,24 @@ END_FOR]]></ST>
       <Declaration><![CDATA[// Update the indicator values based on the value of the outputs
 METHOD UpdateIndicators
 VAR
-	i	: INT;		// Iterator variable
+	i		: INT;		// Iterator variable
+	bOn		: BOOL;		// True if at least one output is on
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Check if there is at least one output in the group since at least one output is needed to determine the output value
 IF nSize > 0 THEN
-	// Set output value of all indicators to that of the first output in the group (all others are the same anyway)
+	// Check if at least one output is on
+	// If only the PLC manipulates the output group all outputs will have the same value
+	// However, if a single output is manipulated externally (by ADS) one output can have a different value
+	// In this case, OR the output values and turn on the indicator if at least one output is on
+	bOn := FALSE;
+	FOR i := 0 TO nSize - 1 DO
+		bOn := bOn OR aOut[i].Output;
+	END_FOR
+	
+	// Set output value of all indicators to that of the value of the output group
 	FOR i := 0 TO nSizeIndicators - 1 DO
-		aIndicator[i].Output := aOut[0].Output;
+		aIndicator[i].Output := bOn;
 	END_FOR
 END_IF]]></ST>
       </Implementation>
