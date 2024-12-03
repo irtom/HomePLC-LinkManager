@@ -18,3 +18,6 @@ TwinCAT library for linking input groups to output groups that is part of the Ho
   - An input group contains digital inputs, an output group contains digital outputs
   - For a list of all possible output group actions and input group commands, see the DIO library
   - An output group constists of digital outputs which is split up in two categories: outputs (relays, lights, ...) and indicators. Outputs can also be manipulated externally (e.g. ADS) while the indicators always show the status of the outputs. 
+
+## Example usage
+See the [example repository](https://github.com/irtom/HomePLC-Example).
